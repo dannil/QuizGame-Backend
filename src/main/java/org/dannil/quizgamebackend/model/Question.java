@@ -2,15 +2,24 @@ package org.dannil.quizgamebackend.model;
 
 public class Question {
 
-	private int id;
+	private Integer id;
 	private String title;
 
-	public Question() {
-		this.id = 20;
-		this.title = "hello world";
+	private Question() {
+
 	}
 
-	public final int getId() {
+	public Question(final String title) {
+		this();
+		this.title = title;
+	}
+
+	public Question(final int id, final String title) {
+		this(title);
+		this.id = id;
+	}
+
+	public final Integer getId() {
 		return this.id;
 	}
 
