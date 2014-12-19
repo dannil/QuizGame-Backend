@@ -127,34 +127,6 @@
 		
 		<!-- END DATABASE -->
 
-		<!-- UTILITIES -->
-		
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		
-		<!-- END UTILITIES -->
-		
-		<!-- VALIDATION -->
-		
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
-			<version>${javax-validation.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		
-		<!-- END VALIDATION -->
-		
 		<!-- OTHER -->
 		
 		<dependency>
