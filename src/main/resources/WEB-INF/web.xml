@@ -22,7 +22,6 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/conf/xml/bean-context.xml
 	        /WEB-INF/conf/xml/application-context.xml
 	    </param-value>
 	</context-param>
