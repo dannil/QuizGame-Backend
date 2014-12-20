@@ -42,6 +42,11 @@
 	    <param-value>/WEB-INF/conf/properties/log4j.properties</param-value>
 	</context-param>
 
+	<context-param>
+		<param-name>log4jExposeWebAppRoot</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
 	<filter>
 		<filter-name>CharsetFilter</filter-name>
 		<filter-class>org.dannil.quizgamebackend.filter.CharsetFilter</filter-class>
