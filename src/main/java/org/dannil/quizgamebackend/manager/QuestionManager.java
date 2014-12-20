@@ -10,9 +10,18 @@ public final class QuestionManager {
 	private static List<Question> questions;
 
 	public QuestionManager() {
-		if (questions == null || questions.size() > 3) {
+		if (questions == null) {
 			questions = new LinkedList<Question>();
 		}
+	}
+
+	public final Question get(final int id) {
+		for (Question q : questions) {
+			if (q.getId().equals(id)) {
+				return q;
+			}
+		}
+		return null;
 	}
 
 	public final void add(final Question question) {
@@ -21,7 +30,7 @@ public final class QuestionManager {
 
 	public final void delete(final int id) {
 		for (Question q : questions) {
-			if (q.getId() == id) {
+			if (q.getId().equals(id)) {
 				delete(q);
 				break;
 			}
@@ -29,9 +38,7 @@ public final class QuestionManager {
 	}
 
 	public final void delete(final Question question) {
-		if (questions.contains(question)) {
-			QuestionManager.questions.remove(question);
-		}
+		QuestionManager.questions.remove(question);
 	}
 
 	public final LinkedList<Question> getQuestions() {

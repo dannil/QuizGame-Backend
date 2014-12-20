@@ -2,6 +2,7 @@ package org.dannil.quizgamebackend.controller;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -19,24 +20,44 @@ public class QuestionController {
 
 	private final static Logger LOGGER = Logger.getLogger(QuestionController.class.getName());
 
+	private QuestionManager manager;
+
+	@PostConstruct
+	public final void init() {
+		this.manager = new QuestionManager();
+
+		Question question1 = new Question("Test");
+		Question question2 = new Question("Not a prime");
+		Question question3 = new Question("Hello World");
+
+		this.manager.add(question1);
+		this.manager.add(question2);
+		this.manager.add(question3);
+
+		LOGGER.info(this.manager.getQuestions().toString());
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
 	public final void questionGET(final HttpServletResponse response) {
 		response.setContentType("application/json");
 
-		Question question1 = new Question(7, "Test");
-		Question question2 = new Question(14, "Not a prime");
-		Question question3 = new Question(20, "Hello World");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.manager.getQuestions());
+			LOGGER.info("\n" + result);
+			response.getWriter().write(result);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-		QuestionManager manager = new QuestionManager();
-		manager.add(question1);
-		manager.add(question2);
-		manager.add(question3);
-
-		LOGGER.info(manager.getQuestions().toString());
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public final void questionIdGET(final HttpServletResponse response, @PathVariable final Integer id) {
+		response.setContentType("application/json");
 
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(manager.getQuestions());
+			String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.manager.get(id));
 			LOGGER.info("\n" + result);
 			response.getWriter().write(result);
 		} catch (IOException e) {
@@ -50,18 +71,17 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public final void questionPUT(final HttpServletResponse response, @PathVariable final Integer id) {
+	public final void questionIdPUT(final HttpServletResponse response, @PathVariable final Integer id) {
 		response.setContentType("application/json");
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public final void questionDELETE(final HttpServletResponse response, @PathVariable final Integer id) {
+	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final Integer id) {
 		response.setContentType("application/json");
 
-		QuestionManager manager = new QuestionManager();
-		manager.delete(id);
+		this.manager.delete(id);
 
-		LOGGER.info(manager.getQuestions().toString());
+		LOGGER.info(this.manager.getQuestions().toString());
 
 	}
 

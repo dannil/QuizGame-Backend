@@ -2,21 +2,19 @@ package org.dannil.quizgamebackend.model;
 
 public class Question {
 
+	private static Integer ID = 0;
+
 	private Integer id;
 	private String title;
 
 	private Question() {
-
+		this.id = ID;
+		ID++;
 	}
 
 	public Question(final String title) {
 		this();
 		this.title = title;
-	}
-
-	public Question(final int id, final String title) {
-		this(title);
-		this.id = id;
 	}
 
 	public final Integer getId() {
@@ -33,6 +31,11 @@ public class Question {
 
 	public final void setTitle(final String title) {
 		this.title = title;
+	}
+
+	@Override
+	public String toString() {
+		return "Question [id=" + this.id + ", title=" + this.title + "]";
 	}
 
 }
