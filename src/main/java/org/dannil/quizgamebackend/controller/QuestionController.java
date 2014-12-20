@@ -1,6 +1,7 @@
 package org.dannil.quizgamebackend.controller;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
@@ -41,13 +42,19 @@ public class QuestionController {
 	public final void questionGET(final HttpServletResponse response) {
 		response.setContentType("application/json");
 
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.manager.getQuestions());
-			LOGGER.info("\n" + result);
-			response.getWriter().write(result);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		final LinkedList<Question> questions = this.manager.getQuestions();
+		if (questions != null) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(questions);
+				LOGGER.info("\n" + result);
+				response.getWriter().write(result);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 	}
 
@@ -55,13 +62,19 @@ public class QuestionController {
 	public final void questionIdGET(final HttpServletResponse response, @PathVariable final Integer id) {
 		response.setContentType("application/json");
 
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.manager.get(id));
-			LOGGER.info("\n" + result);
-			response.getWriter().write(result);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		final Question question = this.manager.get(id);
+		if (question != null) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(question);
+				LOGGER.info("\n" + result);
+				response.getWriter().write(result);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 	}
 
@@ -79,9 +92,12 @@ public class QuestionController {
 	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final Integer id) {
 		response.setContentType("application/json");
 
-		this.manager.delete(id);
-
-		LOGGER.info(this.manager.getQuestions().toString());
+		boolean success = this.manager.delete(id);
+		if (success) {
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 
 	}
 

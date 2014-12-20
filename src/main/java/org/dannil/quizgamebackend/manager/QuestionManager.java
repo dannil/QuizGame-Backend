@@ -28,13 +28,14 @@ public final class QuestionManager {
 		QuestionManager.questions.add(question);
 	}
 
-	public final void delete(final int id) {
+	public final boolean delete(final int id) {
 		for (Question q : questions) {
 			if (q.getId().equals(id)) {
 				delete(q);
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public final void delete(final Question question) {
