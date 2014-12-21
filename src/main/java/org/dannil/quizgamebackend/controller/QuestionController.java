@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.dannil.quizgamebackend.manager.QuestionManager;
+import org.dannil.quizgamebackend.model.Answer;
 import org.dannil.quizgamebackend.model.Question;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,15 +29,13 @@ public class QuestionController {
 	public final void init() {
 		this.manager = new QuestionManager();
 
-		Question question1 = new Question("Test");
+		Question question1 = new Question("Basic Math", "3 + 4 = ?", new Answer("5"), new Answer("7"), new Answer("-1"));
 		Question question2 = new Question("Not a prime");
 		Question question3 = new Question("Hello World");
 
 		this.manager.add(question1);
 		this.manager.add(question2);
 		this.manager.add(question3);
-
-		LOGGER.info(this.manager.getQuestions().toString());
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -79,8 +79,16 @@ public class QuestionController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final void questionPOST(final HttpServletResponse response) {
+	public final void questionPOST(final HttpServletRequest request, final HttpServletResponse response) {
 		response.setContentType("application/json");
+
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Question question = mapper.readValue(mapper.writeValueAsString(this.manager.get(0)), Question.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
