@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/category")
 public final class CategoryController {
 
-	private final static Logger LOGGER = Logger.getLogger(QuestionController.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(CategoryController.class.getName());
 
 	private CategoryManager manager;
 
