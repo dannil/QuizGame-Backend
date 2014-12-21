@@ -6,13 +6,9 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public final class JsonUtility {
 
-	public final static String generateJson(final Object obj) {
+	public final static String generateJson(final Object obj) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		try {
-			return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
 	}
 
 }
