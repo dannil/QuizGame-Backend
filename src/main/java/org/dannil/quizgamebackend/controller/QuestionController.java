@@ -44,7 +44,7 @@ public class QuestionController {
 		response.setContentType("application/json");
 
 		final LinkedList<Question> questions = this.manager.getQuestions();
-		if (questions != null) {
+		if (questions.size() > 0) {
 			String json = JsonUtility.generateJson(questions);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
@@ -105,7 +105,7 @@ public class QuestionController {
 		response.setContentType("application/json");
 
 		final LinkedList<Question> questions = this.manager.findByCategory(category);
-		if (questions != null) {
+		if (questions.size() > 0) {
 			String json = JsonUtility.generateJson(questions);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
@@ -114,5 +114,4 @@ public class QuestionController {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
 	}
-
 }
