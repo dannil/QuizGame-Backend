@@ -8,9 +8,9 @@ public class Question {
 	private static Integer ID = 0;
 
 	private Integer id;
-	private String category;
 	private String title;
 
+	private List<Category> categories;
 	private List<Answer> answers;
 
 	private Question() {
@@ -18,6 +18,7 @@ public class Question {
 		ID++;
 
 		this.answers = new LinkedList<Answer>();
+		this.categories = new LinkedList<Category>();
 	}
 
 	public Question(final String title) {
@@ -25,13 +26,13 @@ public class Question {
 		this.title = title;
 	}
 
-	public Question(final String category, final String title) {
+	public Question(final LinkedList<Category> categories, final String title) {
 		this(title);
-		this.category = category;
+		this.categories = categories;
 	}
 
-	public Question(final String category, final String title, Answer... answers) {
-		this(category, title);
+	public Question(final LinkedList<Category> categories, final String title, Answer... answers) {
+		this(categories, title);
 		this.addAnswers(answers);
 	}
 
@@ -47,12 +48,12 @@ public class Question {
 		this.title = title;
 	}
 
-	public final String getCategory() {
-		return this.category;
+	public final LinkedList<Category> getCategories() {
+		return new LinkedList<Category>(this.categories);
 	}
 
-	public final void setCategory(final String category) {
-		this.category = category;
+	public final void setCategory(final LinkedList<Category> categories) {
+		this.categories = categories;
 	}
 
 	public final List<Answer> getAnswers() {
@@ -77,7 +78,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [id=" + this.id + ", category=" + this.category + ", title=" + this.title + ", answers=" + this.answers + "]";
+		return "Question [id=" + this.id + ", category=" + this.categories + ", title=" + this.title + ", answers=" + this.answers + "]";
 	}
 
 }

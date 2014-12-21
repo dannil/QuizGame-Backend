@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.dannil.quizgamebackend.manager.CategoryManager;
 import org.dannil.quizgamebackend.manager.QuestionManager;
 import org.dannil.quizgamebackend.model.Answer;
+import org.dannil.quizgamebackend.model.Category;
 import org.dannil.quizgamebackend.model.Question;
 import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
@@ -30,9 +32,17 @@ public class QuestionController {
 	public final void init() {
 		this.manager = new QuestionManager();
 
-		Question question1 = new Question("basic", "Solve 3 + 4", new Answer("5"), new Answer("7"), new Answer("-1"));
-		Question question2 = new Question("basic", "Solve 2^3", new Answer("16"), new Answer("8"));
-		Question question3 = new Question("algebra", "Factor the expression (a+b)(a−b)", new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
+		LinkedList<Category> categories1 = new LinkedList<Category>();
+		categories1.add(new Category("basic"));
+		Question question1 = new Question(categories1, "Solve 3 + 4", new Answer("5"), new Answer("7"), new Answer("-1"));
+
+		LinkedList<Category> categories2 = new LinkedList<Category>();
+		categories2.add(new Category("basic"));
+		Question question2 = new Question(categories2, "Solve 2^3", new Answer("16"), new Answer("8"));
+
+		LinkedList<Category> categories3 = new LinkedList<Category>();
+		categories3.add(new Category("algebra"));
+		Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)", new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
 
 		this.manager.add(question1);
 		this.manager.add(question2);
@@ -104,7 +114,10 @@ public class QuestionController {
 	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final String category) throws IOException {
 		response.setContentType("application/json");
 
-		final LinkedList<Question> questions = this.manager.findByCategory(category);
+		final CategoryManager manager = new CategoryManager();
+		final Category c = manager.get(category);
+
+		final LinkedList<Question> questions = this.manager.findByCategory(c);
 		if (questions.size() > 0) {
 			String json = JsonUtility.generateJson(questions);
 			LOGGER.info("\n" + json);
