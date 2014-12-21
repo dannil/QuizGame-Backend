@@ -30,7 +30,7 @@ public final class QuestionManager {
 		for (Question q : questions) {
 			LinkedList<Category> categories = q.getCategories();
 			for (Category c : categories) {
-				if (c.equals(category)) {
+				if (c.getCategory().equals(category.getCategory())) {
 					temp.add(q);
 				}
 			}
