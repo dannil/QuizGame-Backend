@@ -69,7 +69,7 @@ public class Question {
 		}
 	}
 
-	public final void addAnswers(Answer... answers) {
+	public final void addAnswers(final Answer... answers) {
 		for (Answer a : answers) {
 			this.addAnswer(a);
 		}
