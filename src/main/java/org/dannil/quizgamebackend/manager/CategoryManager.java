@@ -12,6 +12,9 @@ public final class CategoryManager {
 	public CategoryManager() {
 		if (categories == null) {
 			categories = new LinkedList<Category>();
+
+			this.add(new Category("basic"));
+			this.add(new Category("algebra"));
 		}
 	}
 

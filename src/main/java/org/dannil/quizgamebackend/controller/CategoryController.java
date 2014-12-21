@@ -25,12 +25,6 @@ public final class CategoryController {
 	@PostConstruct
 	public final void init() {
 		this.manager = new CategoryManager();
-
-		Category category1 = new Category("basic");
-		Category category2 = new Category("algebra");
-
-		this.manager.add(category1);
-		this.manager.add(category2);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
