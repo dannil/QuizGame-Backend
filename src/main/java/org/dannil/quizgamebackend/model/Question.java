@@ -32,17 +32,11 @@ public class Question {
 
 	public Question(final String category, final String title, Answer... answers) {
 		this(category, title);
-		for (Answer a : answers) {
-			this.addAnswer(a);
-		}
+		this.addAnswers(answers);
 	}
 
 	public final Integer getId() {
 		return this.id;
-	}
-
-	public final void setId(final int id) {
-		this.id = id;
 	}
 
 	public final String getTitle() {
@@ -65,7 +59,7 @@ public class Question {
 		return this.answers;
 	}
 
-	public final void setAnswersfinal(final List<Answer> answers) {
+	public final void setAnswers(final List<Answer> answers) {
 		this.answers = answers;
 	}
 
@@ -75,9 +69,15 @@ public class Question {
 		}
 	}
 
+	public final void addAnswers(Answer... answers) {
+		for (Answer a : answers) {
+			this.addAnswer(a);
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "Question [id=" + this.id + ", title=" + this.title + "]";
+		return "Question [id=" + this.id + ", category=" + this.category + ", title=" + this.title + ", answers=" + this.answers + "]";
 	}
 
 }

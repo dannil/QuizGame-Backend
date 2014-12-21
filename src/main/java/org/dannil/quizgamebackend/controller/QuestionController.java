@@ -29,9 +29,9 @@ public class QuestionController {
 	public final void init() {
 		this.manager = new QuestionManager();
 
-		Question question1 = new Question("Basic Math", "3 + 4 = ?", new Answer("5"), new Answer("7"), new Answer("-1"));
-		Question question2 = new Question("Not a prime");
-		Question question3 = new Question("Hello World");
+		Question question1 = new Question("Basic Math", "Solve 3 + 4", new Answer("5"), new Answer("7"), new Answer("-1"));
+		Question question2 = new Question("Basic Math", "Solve 2^3", new Answer("16"), new Answer("8"));
+		Question question3 = new Question("Algebra", "Factor the expression (a+b)(a−b)", new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
 
 		this.manager.add(question1);
 		this.manager.add(question2);
