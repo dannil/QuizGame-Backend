@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.dannil.quizgamebackend.manager.QuestionManager;
 import org.dannil.quizgamebackend.model.Answer;
 import org.dannil.quizgamebackend.model.Question;
+import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,19 +40,14 @@ public class QuestionController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public final void questionGET(final HttpServletResponse response) {
+	public final void questionGET(final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
 		final LinkedList<Question> questions = this.manager.getQuestions();
 		if (questions != null) {
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(questions);
-				LOGGER.info("\n" + result);
-				response.getWriter().write(result);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			String json = JsonUtility.generateJson(questions);
+			LOGGER.info("\n" + json);
+			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -59,19 +55,14 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public final void questionIdGET(final HttpServletResponse response, @PathVariable final Integer id) {
+	public final void questionIdGET(final HttpServletResponse response, @PathVariable final Integer id) throws IOException {
 		response.setContentType("application/json");
 
 		final Question question = this.manager.get(id);
 		if (question != null) {
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(question);
-				LOGGER.info("\n" + result);
-				response.getWriter().write(result);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			String json = JsonUtility.generateJson(question);
+			LOGGER.info("\n" + json);
+			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -84,6 +75,7 @@ public class QuestionController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		try {
+			// TODO
 			Question question = mapper.readValue(mapper.writeValueAsString(this.manager.get(0)), Question.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -109,19 +101,14 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
-	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final String category) {
+	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final String category) throws IOException {
 		response.setContentType("application/json");
 
 		final LinkedList<Question> questions = this.manager.findByCategory(category);
 		if (questions != null) {
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(questions);
-				LOGGER.info("\n" + result);
-				response.getWriter().write(result);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			String json = JsonUtility.generateJson(questions);
+			LOGGER.info("\n" + json);
+			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
