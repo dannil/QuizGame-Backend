@@ -106,7 +106,26 @@ public class QuestionController {
 		} else {
 			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 		}
+	}
 
+	@RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
+	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final String category) {
+		response.setContentType("application/json");
+
+		final LinkedList<Question> questions = this.manager.findByCategory(category);
+		if (questions != null) {
+			ObjectMapper mapper = new ObjectMapper();
+			try {
+				String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(questions);
+				LOGGER.info("\n" + result);
+				response.getWriter().write(result);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
 	}
 
 }

@@ -24,6 +24,16 @@ public final class QuestionManager {
 		return null;
 	}
 
+	public final LinkedList<Question> findByCategory(final String category) {
+		LinkedList<Question> temp = new LinkedList<Question>();
+		for (Question q : questions) {
+			if (q.getCategory().equals(category)) {
+				temp.add(q);
+			}
+		}
+		return temp;
+	}
+
 	public final void add(final Question question) {
 		QuestionManager.questions.add(question);
 	}
