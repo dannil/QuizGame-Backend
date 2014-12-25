@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.dannil.quizgamebackend.manager.CategoryManager;
 import org.dannil.quizgamebackend.manager.QuestionManager;
 import org.dannil.quizgamebackend.model.Answer;
@@ -57,7 +56,7 @@ public class QuestionController {
 
 		final LinkedList<Question> questions = this.questionManager.getQuestions();
 		if (questions.size() > 0) {
-			final String json = JsonUtility.generateJson(questions);
+			final String json = JsonUtility.convertToJson(questions);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -72,7 +71,7 @@ public class QuestionController {
 
 		final Question question = this.questionManager.get(id);
 		if (question != null) {
-			final String json = JsonUtility.generateJson(question);
+			final String json = JsonUtility.convertToJson(question);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -85,13 +84,12 @@ public class QuestionController {
 	public final void questionPOST(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
-		final String jsonToConvert = JsonUtility.convertToStandard(request.getParameter("json"));
+		final String jsonToConvert = JsonUtility.convert(request.getParameter("json"));
 
-		final ObjectMapper mapper = new ObjectMapper();
-		final Question question = mapper.readValue(jsonToConvert, Question.class);
+		final Question question = JsonUtility.convertFromJson(jsonToConvert);
 		this.questionManager.add(question);
 
-		final String json = JsonUtility.generateJson(question);
+		final String json = JsonUtility.convertToJson(question);
 		LOGGER.info("\n" + json);
 		response.getWriter().write(json);
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -122,7 +120,7 @@ public class QuestionController {
 
 		final LinkedList<Question> questions = this.questionManager.findByCategory(c);
 		if (questions.size() > 0) {
-			final String json = JsonUtility.generateJson(questions);
+			final String json = JsonUtility.convertToJson(questions);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);

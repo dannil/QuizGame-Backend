@@ -33,7 +33,7 @@ public final class CategoryController {
 
 		final LinkedList<Category> categories = this.manager.getCategories();
 		if (categories.size() > 0) {
-			String json = JsonUtility.generateJson(categories);
+			String json = JsonUtility.convertToJson(categories);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
