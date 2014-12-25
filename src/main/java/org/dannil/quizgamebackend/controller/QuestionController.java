@@ -34,17 +34,17 @@ public class QuestionController {
 		this.questionManager = new QuestionManager();
 		this.categoryManager = new CategoryManager();
 
-		LinkedList<Category> categories1 = new LinkedList<Category>();
+		final LinkedList<Category> categories1 = new LinkedList<Category>();
 		categories1.add(this.categoryManager.get("basic"));
-		Question question1 = new Question(categories1, "Solve 3 + 4", new Answer("5"), new Answer("7"), new Answer("-1"));
+		final Question question1 = new Question(categories1, "Solve 3 + 4", new Answer("5"), new Answer("7"), new Answer("-1"));
 
-		LinkedList<Category> categories2 = new LinkedList<Category>();
+		final LinkedList<Category> categories2 = new LinkedList<Category>();
 		categories2.add(this.categoryManager.get("basic"));
-		Question question2 = new Question(categories2, "Solve 2^3", new Answer("16"), new Answer("8"));
+		final Question question2 = new Question(categories2, "Solve 2^3", new Answer("16"), new Answer("8"));
 
-		LinkedList<Category> categories3 = new LinkedList<Category>();
+		final LinkedList<Category> categories3 = new LinkedList<Category>();
 		categories3.add(this.categoryManager.get("algebra"));
-		Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)", new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
+		final Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)", new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
 
 		this.questionManager.add(question1);
 		this.questionManager.add(question2);
@@ -57,7 +57,7 @@ public class QuestionController {
 
 		final LinkedList<Question> questions = this.questionManager.getQuestions();
 		if (questions.size() > 0) {
-			String json = JsonUtility.generateJson(questions);
+			final String json = JsonUtility.generateJson(questions);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -72,7 +72,7 @@ public class QuestionController {
 
 		final Question question = this.questionManager.get(id);
 		if (question != null) {
-			String json = JsonUtility.generateJson(question);
+			final String json = JsonUtility.generateJson(question);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -87,8 +87,8 @@ public class QuestionController {
 
 		final String jsonToConvert = JsonUtility.convertToStandard(request.getParameter("json"));
 
-		ObjectMapper mapper = new ObjectMapper();
-		Question question = mapper.readValue(jsonToConvert, Question.class);
+		final ObjectMapper mapper = new ObjectMapper();
+		final Question question = mapper.readValue(jsonToConvert, Question.class);
 		this.questionManager.add(question);
 
 		final String json = JsonUtility.generateJson(question);
@@ -106,7 +106,7 @@ public class QuestionController {
 	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final Integer id) {
 		response.setContentType("application/json");
 
-		boolean success = this.questionManager.delete(id);
+		final boolean success = this.questionManager.delete(id);
 		if (success) {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
@@ -122,7 +122,7 @@ public class QuestionController {
 
 		final LinkedList<Question> questions = this.questionManager.findByCategory(c);
 		if (questions.size() > 0) {
-			String json = JsonUtility.generateJson(questions);
+			final String json = JsonUtility.generateJson(questions);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
