@@ -82,17 +82,19 @@ public class QuestionController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public final void questionPOST(final HttpServletRequest request, final HttpServletResponse response) {
+	public final void questionPOST(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
+		final String jsonToConvert = JsonUtility.convertToStandard(request.getParameter("json"));
+
 		ObjectMapper mapper = new ObjectMapper();
-		try {
-			// TODO
-			Question question = mapper.readValue(mapper.writeValueAsString(this.questionManager.get(0)), Question.class);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Question question = mapper.readValue(jsonToConvert, Question.class);
+		this.questionManager.add(question);
+
+		final String json = JsonUtility.generateJson(question);
+		LOGGER.info("\n" + json);
+		response.getWriter().write(json);
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)

@@ -8,6 +8,8 @@ import org.dannil.quizgamebackend.model.Question;
 
 public final class QuestionManager {
 
+	private static int ID = 1;
+
 	private static List<Question> questions;
 
 	public QuestionManager() {
@@ -28,7 +30,7 @@ public final class QuestionManager {
 	public final LinkedList<Question> findByCategory(final Category category) {
 		LinkedList<Question> temp = new LinkedList<Question>();
 		for (Question q : questions) {
-			LinkedList<Category> categories = q.getCategories();
+			LinkedList<Category> categories = new LinkedList<Category>(q.getCategories());
 			for (Category c : categories) {
 				if (c.getCategory().equals(category.getCategory())) {
 					temp.add(q);
@@ -39,6 +41,9 @@ public final class QuestionManager {
 	}
 
 	public final void add(final Question question) {
+		question.setId(ID);
+		ID++;
+
 		QuestionManager.questions.add(question);
 	}
 

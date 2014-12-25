@@ -3,9 +3,10 @@ package org.dannil.quizgamebackend.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Question {
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
-	private static Integer ID = 0;
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+public class Question {
 
 	private Integer id;
 	private String title;
@@ -13,10 +14,7 @@ public class Question {
 	private List<Category> categories;
 	private List<Answer> answers;
 
-	private Question() {
-		this.id = ID;
-		ID++;
-
+	public Question() {
 		this.answers = new LinkedList<Answer>();
 		this.categories = new LinkedList<Category>();
 	}
@@ -40,6 +38,10 @@ public class Question {
 		return this.id;
 	}
 
+	public final void setId(final Integer id) {
+		this.id = id;
+	}
+
 	public final String getTitle() {
 		return this.title;
 	}
@@ -48,8 +50,8 @@ public class Question {
 		this.title = title;
 	}
 
-	public final LinkedList<Category> getCategories() {
-		return new LinkedList<Category>(this.categories);
+	public final List<Category> getCategories() {
+		return this.categories;
 	}
 
 	public final void setCategory(final LinkedList<Category> categories) {
