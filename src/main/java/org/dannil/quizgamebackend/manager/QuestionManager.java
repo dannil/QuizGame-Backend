@@ -47,6 +47,14 @@ public final class QuestionManager {
 		QuestionManager.questions.add(question);
 	}
 
+	public final Question edit(final int id, final Question question) {
+		final int index = QuestionManager.questions.indexOf(this.get(id));
+		final Question newQuestion = new Question(question.getCategories(), question.getTitle(), question.getAnswers());
+		QuestionManager.questions.set(index, newQuestion);
+
+		return QuestionManager.questions.get(index);
+	}
+
 	public final boolean delete(final int id) {
 		for (Question q : questions) {
 			if (q.getId().equals(id)) {

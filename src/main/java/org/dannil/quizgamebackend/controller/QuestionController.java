@@ -35,15 +35,18 @@ public class QuestionController {
 
 		final LinkedList<Category> categories1 = new LinkedList<Category>();
 		categories1.add(this.categoryManager.get("basic"));
-		final Question question1 = new Question(categories1, "Solve 3 + 4", new Answer("5"), new Answer("7"), new Answer("-1"));
+		final Question question1 = new Question(categories1, "Solve 3 + 4");
+		question1.addAnswers(new Answer("5"), new Answer("7"), new Answer("-1"));
 
 		final LinkedList<Category> categories2 = new LinkedList<Category>();
 		categories2.add(this.categoryManager.get("basic"));
-		final Question question2 = new Question(categories2, "Solve 2^3", new Answer("16"), new Answer("8"));
+		final Question question2 = new Question(categories2, "Solve 2^3");
+		question2.addAnswers(new Answer("16"), new Answer("8"));
 
 		final LinkedList<Category> categories3 = new LinkedList<Category>();
 		categories3.add(this.categoryManager.get("algebra"));
-		final Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)", new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
+		final Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)");
+		question3.addAnswers(new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
 
 		this.questionManager.add(question1);
 		this.questionManager.add(question2);

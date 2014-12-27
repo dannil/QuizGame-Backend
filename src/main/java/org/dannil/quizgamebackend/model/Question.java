@@ -24,14 +24,14 @@ public class Question {
 		this.title = title;
 	}
 
-	public Question(final LinkedList<Category> categories, final String title) {
+	public Question(final List<Category> categories, final String title) {
 		this(title);
 		this.categories = categories;
 	}
 
-	public Question(final LinkedList<Category> categories, final String title, Answer... answers) {
+	public Question(final List<Category> categories, final String title, final List<Answer> answers) {
 		this(categories, title);
-		this.addAnswers(answers);
+		this.answers = answers;
 	}
 
 	public final Integer getId() {
