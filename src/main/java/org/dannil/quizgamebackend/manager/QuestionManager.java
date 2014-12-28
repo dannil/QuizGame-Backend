@@ -7,7 +7,7 @@ import org.dannil.quizgamebackend.model.Question;
 
 public final class QuestionManager {
 
-	private static int ID = 1;
+	private static int ID = 0;
 
 	private static List<Question> questions;
 
