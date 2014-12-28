@@ -3,36 +3,34 @@ package org.dannil.quizgamebackend.manager;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.dannil.quizgamebackend.model.Category;
-
 public final class CategoryManager {
 
-	private static List<Category> categories;
+	private static List<String> categories;
 
 	public CategoryManager() {
 		if (categories == null) {
-			categories = new LinkedList<Category>();
+			categories = new LinkedList<String>();
 
-			this.add(new Category("basic"));
-			this.add(new Category("algebra"));
+			this.add("basic");
+			this.add("algebra");
 		}
 	}
 
-	public final Category get(final String category) {
-		for (Category c : categories) {
-			if (c.getCategory().equals(category)) {
-				return c;
+	public final String get(final String category) {
+		for (String s : categories) {
+			if (s.equals(category)) {
+				return s;
 			}
 		}
 		return null;
 	}
 
-	public final void add(final Category category) {
+	public final void add(final String category) {
 		CategoryManager.categories.add(category);
 	}
 
-	public final LinkedList<Category> getCategories() {
-		return new LinkedList<Category>(CategoryManager.categories);
+	public final LinkedList<String> getCategories() {
+		return new LinkedList<String>(CategoryManager.categories);
 	}
 
 }

@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.dannil.quizgamebackend.manager.CategoryManager;
 import org.dannil.quizgamebackend.manager.QuestionManager;
-import org.dannil.quizgamebackend.model.Answer;
-import org.dannil.quizgamebackend.model.Category;
 import org.dannil.quizgamebackend.model.Question;
 import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
@@ -33,20 +31,20 @@ public class QuestionController {
 		this.questionManager = new QuestionManager();
 		this.categoryManager = new CategoryManager();
 
-		final LinkedList<Category> categories1 = new LinkedList<Category>();
-		categories1.add(this.categoryManager.get("basic"));
+		final LinkedList<String> categories1 = new LinkedList<String>();
+		categories1.add("basic");
 		final Question question1 = new Question(categories1, "Solve 3 + 4");
-		question1.addAnswers(new Answer("5"), new Answer("7"), new Answer("-1"));
+		question1.addAnswers("5", "7", "-1");
 
-		final LinkedList<Category> categories2 = new LinkedList<Category>();
-		categories2.add(this.categoryManager.get("basic"));
+		final LinkedList<String> categories2 = new LinkedList<String>();
+		categories2.add("basic");
 		final Question question2 = new Question(categories2, "Solve 2^3");
-		question2.addAnswers(new Answer("16"), new Answer("8"));
+		question2.addAnswers("16", "8");
 
-		final LinkedList<Category> categories3 = new LinkedList<Category>();
-		categories3.add(this.categoryManager.get("algebra"));
+		final LinkedList<String> categories3 = new LinkedList<String>();
+		categories3.add("algebra");
 		final Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)");
-		question3.addAnswers(new Answer("a-b"), new Answer("a^2-b"), new Answer("a^2-b^2"), new Answer("a-b^2"));
+		question3.addAnswers("a-b", "a^2-b", "a^2-b^2", "a-b^2");
 
 		this.questionManager.add(question1);
 		this.questionManager.add(question2);
@@ -117,9 +115,7 @@ public class QuestionController {
 	public final void questionCategoryGET(final HttpServletResponse response, @PathVariable final String category) throws IOException {
 		response.setContentType("application/json");
 
-		final Category c = this.categoryManager.get(category);
-
-		final LinkedList<Question> questions = this.questionManager.findByCategory(c);
+		final LinkedList<Question> questions = this.questionManager.findByCategory(category);
 		if (questions.size() > 0) {
 			final String json = JsonUtility.convertToJson(questions);
 			LOGGER.info("\n" + json);

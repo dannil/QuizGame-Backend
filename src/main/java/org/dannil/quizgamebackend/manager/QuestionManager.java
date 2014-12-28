@@ -3,7 +3,6 @@ package org.dannil.quizgamebackend.manager;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.dannil.quizgamebackend.model.Category;
 import org.dannil.quizgamebackend.model.Question;
 
 public final class QuestionManager {
@@ -27,12 +26,12 @@ public final class QuestionManager {
 		return null;
 	}
 
-	public final LinkedList<Question> findByCategory(final Category category) {
+	public final LinkedList<Question> findByCategory(final String category) {
 		LinkedList<Question> temp = new LinkedList<Question>();
 		for (Question q : questions) {
-			LinkedList<Category> categories = new LinkedList<Category>(q.getCategories());
-			for (Category c : categories) {
-				if (c.getCategory().equals(category.getCategory())) {
+			final LinkedList<String> categories = new LinkedList<String>(q.getCategories());
+			for (String s : categories) {
+				if (s.equals(category)) {
 					temp.add(q);
 				}
 			}

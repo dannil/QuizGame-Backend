@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.dannil.quizgamebackend.manager.CategoryManager;
-import org.dannil.quizgamebackend.model.Category;
 import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ public final class CategoryController {
 	public final void categoryGET(final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
-		final LinkedList<Category> categories = this.manager.getCategories();
+		final LinkedList<String> categories = this.manager.getCategories();
 		if (categories.size() > 0) {
 			String json = JsonUtility.convertToJson(categories);
 			LOGGER.info("\n" + json);
