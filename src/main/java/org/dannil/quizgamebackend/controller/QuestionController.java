@@ -87,9 +87,7 @@ public class QuestionController {
 	public final void questionPOST(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
-		final String jsonToConvert = JsonUtility.convert(request.getParameter("json"));
-
-		final Question question = JsonUtility.convertFromJson(jsonToConvert);
+		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
 		this.questionManager.add(question);
 
 		final String json = JsonUtility.convertToJson(question);

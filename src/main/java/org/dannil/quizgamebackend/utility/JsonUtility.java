@@ -8,18 +8,6 @@ import org.dannil.quizgamebackend.model.Question;
 public final class JsonUtility {
 
 	/**
-	 * Convert the specified JSON string to a unified format.
-	 * 
-	 * @param json
-	 * 				the JSON-string to convert
-	 * 
-	 * @return a new JSON string
-	 */
-	public final static String convert(final String json) {
-		return json.toLowerCase().replace("null", "[]");
-	}
-
-	/**
 	 * Convert the specified object to a JSON string.
 	 * 
 	 * @param obj
