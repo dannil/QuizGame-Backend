@@ -72,4 +72,16 @@ public final class QuestionManager {
 		return new LinkedList<Question>(QuestionManager.questions);
 	}
 
+	public final LinkedList<String> getCategories() {
+		final LinkedList<String> categories = new LinkedList<String>();
+		for (Question q : questions) {
+			for (String s : q.getCategories()) {
+				if (!categories.contains(s)) {
+					categories.add(s);
+				}
+			}
+		}
+		return categories;
+	}
+
 }

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dannil.quizgamebackend.manager.CategoryManager;
 import org.dannil.quizgamebackend.manager.QuestionManager;
 import org.dannil.quizgamebackend.model.Question;
 import org.dannil.quizgamebackend.utility.JsonUtility;
@@ -24,12 +23,10 @@ public class QuestionController {
 	private final static Logger LOGGER = Logger.getLogger(QuestionController.class.getName());
 
 	private QuestionManager questionManager;
-	private CategoryManager categoryManager;
 
 	@PostConstruct
 	public final void init() {
 		this.questionManager = new QuestionManager();
-		this.categoryManager = new CategoryManager();
 
 		final LinkedList<String> categories1 = new LinkedList<String>();
 		categories1.add("basic");

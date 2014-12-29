@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.dannil.quizgamebackend.manager.CategoryManager;
+import org.dannil.quizgamebackend.manager.QuestionManager;
 import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,18 +19,18 @@ public final class CategoryController {
 
 	private final static Logger LOGGER = Logger.getLogger(CategoryController.class.getName());
 
-	private CategoryManager manager;
+	private QuestionManager questionManager;
 
 	@PostConstruct
 	public final void init() {
-		this.manager = new CategoryManager();
+		this.questionManager = new QuestionManager();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public final void categoryGET(final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
-		final LinkedList<String> categories = this.manager.getCategories();
+		final LinkedList<String> categories = this.questionManager.getCategories();
 		if (categories.size() > 0) {
 			String json = JsonUtility.convertToJson(categories);
 			LOGGER.info("\n" + json);
