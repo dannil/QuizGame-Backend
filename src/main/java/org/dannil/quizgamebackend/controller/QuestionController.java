@@ -91,9 +91,17 @@ public class QuestionController {
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public final void questionIdPUT(final HttpServletResponse response, @PathVariable final Integer id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public final void questionIdPOST(final HttpServletRequest request, final HttpServletResponse response, @PathVariable final Integer id) throws IOException {
 		response.setContentType("application/json");
+
+		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
+		final Question result = this.questionManager.edit(id, question);
+
+		final String json = JsonUtility.convertToJson(result);
+		LOGGER.info("\n" + json);
+		response.getWriter().write(json);
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
