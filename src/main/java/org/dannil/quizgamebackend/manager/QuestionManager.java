@@ -27,7 +27,7 @@ public final class QuestionManager {
 	}
 
 	public final LinkedList<Question> findByCategory(final String category) {
-		LinkedList<Question> temp = new LinkedList<Question>();
+		final LinkedList<Question> temp = new LinkedList<Question>();
 		for (Question q : questions) {
 			final LinkedList<String> categories = new LinkedList<String>(q.getCategories());
 			for (String s : categories) {
