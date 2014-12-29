@@ -28,19 +28,16 @@ public class QuestionController {
 	public final void init() {
 		this.questionManager = new QuestionManager();
 
-		final LinkedList<String> categories1 = new LinkedList<String>();
-		categories1.add("basic");
-		final Question question1 = new Question(categories1, "Solve 3 + 4");
+		final Question question1 = new Question("Solve 3 + 4");
+		question1.addCategories("basic");
 		question1.addAnswers("5", "7", "-1");
 
-		final LinkedList<String> categories2 = new LinkedList<String>();
-		categories2.add("basic");
-		final Question question2 = new Question(categories2, "Solve 2^3");
+		final Question question2 = new Question("Solve 2^3");
+		question2.addCategories("basic");
 		question2.addAnswers("16", "8");
 
-		final LinkedList<String> categories3 = new LinkedList<String>();
-		categories3.add("algebra");
-		final Question question3 = new Question(categories3, "Factor the expression (a+b)(a−b)");
+		final Question question3 = new Question("Factor the expression (a+b)(a−b)");
+		question3.addCategories("algebra");
 		question3.addAnswers("a-b", "a^2-b", "a^2-b^2", "a-b^2");
 
 		this.questionManager.add(question1);

@@ -54,7 +54,7 @@ public class Question {
 		return this.categories;
 	}
 
-	public final void setCategory(final LinkedList<String> categories) {
+	public final void setCategories(final LinkedList<String> categories) {
 		this.categories = categories;
 	}
 
@@ -66,8 +66,32 @@ public class Question {
 		this.answers = answers;
 	}
 
+	public final void addCategory(final String category) {
+		if (category != null) {
+			this.categories.add(category);
+		}
+	}
+
+	public final void addCategories(final String... categories) {
+		for (String s : categories) {
+			this.addCategory(s);
+		}
+	}
+
+	public final void removeCategory(final String category) {
+		if (category != null) {
+			this.categories.remove(category);
+		}
+	}
+
+	public final void removeCategories(final String... categories) {
+		for (String s : categories) {
+			this.removeCategory(s);
+		}
+	}
+
 	public final void addAnswer(final String answer) {
-		if (this.answers != null) {
+		if (answer != null) {
 			this.answers.add(answer);
 		}
 	}
@@ -75,6 +99,18 @@ public class Question {
 	public final void addAnswers(final String... answers) {
 		for (String s : answers) {
 			this.addAnswer(s);
+		}
+	}
+
+	public final void removeAnswer(final String answer) {
+		if (answer != null) {
+			this.answers.remove(answer);
+		}
+	}
+
+	public final void removeAnswers(final String... answers) {
+		for (String s : answers) {
+			this.removeAnswer(s);
 		}
 	}
 
