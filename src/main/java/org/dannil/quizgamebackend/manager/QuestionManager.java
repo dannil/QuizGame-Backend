@@ -29,10 +29,11 @@ public final class QuestionManager {
 	public final LinkedList<Question> findByCategory(final String category) {
 		final LinkedList<Question> temp = new LinkedList<Question>();
 		for (Question q : questions) {
-			final LinkedList<String> categories = new LinkedList<String>(q.getCategories());
-			for (String s : categories) {
-				if (s.equals(category)) {
-					temp.add(q);
+			if (q.getCategories() != null) {
+				for (String s : q.getCategories()) {
+					if (s.equals(category)) {
+						temp.add(q);
+					}
 				}
 			}
 		}
@@ -77,9 +78,11 @@ public final class QuestionManager {
 	public final LinkedList<String> getCategories() {
 		final LinkedList<String> categories = new LinkedList<String>();
 		for (Question q : questions) {
-			for (String s : q.getCategories()) {
-				if (!categories.contains(s)) {
-					categories.add(s);
+			if (q.getCategories() != null) {
+				for (String s : q.getCategories()) {
+					if (!categories.contains(s)) {
+						categories.add(s);
+					}
 				}
 			}
 		}
