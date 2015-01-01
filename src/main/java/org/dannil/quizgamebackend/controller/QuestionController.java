@@ -64,7 +64,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public final void questionIdGET(final HttpServletResponse response, @PathVariable final Integer id) throws IOException {
+	public final void questionIdGET(final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
 		response.setContentType("application/json");
 
 		final Question question = this.questionManager.get(id);
@@ -92,7 +92,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public final void questionIdPOST(final HttpServletRequest request, final HttpServletResponse response, @PathVariable final Integer id) throws IOException {
+	public final void questionIdPOST(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
 		response.setContentType("application/json");
 
 		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
@@ -105,7 +105,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable final Integer id) {
+	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable("id") final Integer id) {
 		response.setContentType("application/json");
 
 		final boolean success = this.questionManager.delete(id);
@@ -117,7 +117,7 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
-	public final void questionCategoryGET(final HttpServletResponse response, @PathVariable final String category) throws IOException {
+	public final void questionCategoryGET(final HttpServletResponse response, @PathVariable("category") final String category) throws IOException {
 		response.setContentType("application/json");
 
 		final LinkedList<Question> questions = this.questionManager.findByCategory(category);
