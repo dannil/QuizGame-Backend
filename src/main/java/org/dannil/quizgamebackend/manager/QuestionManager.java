@@ -89,4 +89,17 @@ public final class QuestionManager {
 		return categories;
 	}
 
+	public final LinkedList<String> getAnswers(final int id) {
+		final LinkedList<String> answers = new LinkedList<String>();
+		for (Question q : questions) {
+			if (q.getId().equals(id) && q.getAnswers() != null) {
+				for (String s : q.getAnswers()) {
+					answers.add(s);
+				}
+				answers.add(q.getCorrect());
+			}
+		}
+		return answers;
+	}
+
 }
