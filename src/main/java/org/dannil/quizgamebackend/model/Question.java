@@ -76,51 +76,35 @@ public class Question {
 		this.correct = correct;
 	}
 
-	public final void addCategory(final String category) {
-		if (category != null) {
-			this.categories.add(category);
-		}
-	}
-
 	public final void addCategories(final String... categories) {
-		for (String s : categories) {
-			this.addCategory(s);
-		}
-	}
-
-	public final void removeCategory(final String category) {
-		if (category != null) {
-			this.categories.remove(category);
+		for (String category : categories) {
+			if (category != null) {
+				this.categories.add(category);
+			}
 		}
 	}
 
 	public final void removeCategories(final String... categories) {
-		for (String s : categories) {
-			this.removeCategory(s);
-		}
-	}
-
-	public final void addAnswer(final String answer) {
-		if (answer != null) {
-			this.answers.add(answer);
+		for (String category : categories) {
+			if (category != null) {
+				this.categories.remove(category);
+			}
 		}
 	}
 
 	public final void addAnswers(final String... answers) {
-		for (String s : answers) {
-			this.addAnswer(s);
-		}
-	}
-
-	public final void removeAnswer(final String answer) {
-		if (answer != null) {
-			this.answers.remove(answer);
+		for (String answer : answers) {
+			if (answer != null) {
+				this.answers.add(answer);
+			}
 		}
 	}
 
 	public final void removeAnswers(final String... answers) {
-		for (String s : answers) {
-			this.removeAnswer(s);
+		for (String answer : answers) {
+			if (answer != null) {
+				this.answers.remove(answer);
+			}
 		}
 	}
 
