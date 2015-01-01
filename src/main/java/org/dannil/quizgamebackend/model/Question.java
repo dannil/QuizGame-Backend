@@ -14,6 +14,8 @@ public class Question {
 	private List<String> categories;
 	private List<String> answers;
 
+	private String correct;
+
 	public Question() {
 		this.categories = new LinkedList<String>();
 		this.answers = new LinkedList<String>();
@@ -66,6 +68,14 @@ public class Question {
 		this.answers = answers;
 	}
 
+	public final String getCorrect() {
+		return this.correct;
+	}
+
+	public final void setCorrect(final String correct) {
+		this.correct = correct;
+	}
+
 	public final void addCategory(final String category) {
 		if (category != null) {
 			this.categories.add(category);
@@ -116,7 +126,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [id=" + this.id + ", category=" + this.categories + ", title=" + this.title + ", answers=" + this.answers + "]";
+		return "Question [id=" + this.id + ", title=" + this.title + ", categories=" + this.categories + ", answers=" + this.answers + ", correct=" + this.correct + "]";
 	}
 
 }
