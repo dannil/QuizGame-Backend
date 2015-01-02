@@ -14,6 +14,25 @@ public final class QuestionManager {
 	public QuestionManager() {
 		if (questions == null) {
 			questions = new LinkedList<Question>();
+
+			final Question question1 = new Question("Solve 3 + 4");
+			question1.addCategories("basic");
+			question1.addAnswers("5", "7", "-1");
+			question1.setCorrect("7");
+
+			final Question question2 = new Question("Solve 2^3");
+			question2.addCategories("basic");
+			question2.addAnswers("16", "8");
+			question2.setCorrect("8");
+
+			final Question question3 = new Question("Factor the expression (a+b)(a−b)");
+			question3.addCategories("algebra");
+			question3.addAnswers("a-b", "a^2-b", "a^2-b^2", "a-b^2");
+			question3.setCorrect("a^2-b^2");
+
+			this.add(question1);
+			this.add(question2);
+			this.add(question3);
 		}
 	}
 
