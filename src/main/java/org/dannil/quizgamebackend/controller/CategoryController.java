@@ -32,7 +32,7 @@ public final class CategoryController {
 
 		final LinkedList<String> categories = this.questionManager.getCategories();
 		if (categories.size() > 0) {
-			String json = JsonUtility.convertToJson(categories);
+			final String json = JsonUtility.convertToJson(categories);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
