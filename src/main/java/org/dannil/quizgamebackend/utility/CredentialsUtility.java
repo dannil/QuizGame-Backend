@@ -10,6 +10,9 @@ public class CredentialsUtility {
 	}
 
 	public static final boolean isLoginCorrect(final String username, final String token) {
+		if (username == null || token == null) {
+			return false;
+		}
 		return (username.equals(CredentialsUtility.USERNAME) || token.equals(CredentialsUtility.TOKEN));
 	}
 
