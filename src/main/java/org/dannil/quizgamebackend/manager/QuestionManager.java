@@ -69,7 +69,7 @@ public final class QuestionManager {
 	public final Question edit(final int id, final Question question) {
 		final Question editQuestion = this.get(id);
 		final int index = QuestionManager.questions.indexOf(editQuestion);
-		final Question newQuestion = new Question(question.getCategories(), question.getTitle(), question.getAnswers());
+		final Question newQuestion = new Question(question.getTitle(), question.getCategories(), question.getAnswers());
 		newQuestion.setId(editQuestion.getId());
 		QuestionManager.questions.set(index, newQuestion);
 

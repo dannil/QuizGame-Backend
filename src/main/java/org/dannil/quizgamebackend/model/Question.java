@@ -26,13 +26,13 @@ public class Question {
 		this.title = title;
 	}
 
-	public Question(final List<String> categories, final String title) {
+	public Question(final String title, final List<String> categories) {
 		this(title);
 		this.categories = categories;
 	}
 
-	public Question(final List<String> categories, final String title, final List<String> answers) {
-		this(categories, title);
+	public Question(final String title, final List<String> categories, final List<String> answers) {
+		this(title, categories);
 		this.answers = answers;
 	}
 
