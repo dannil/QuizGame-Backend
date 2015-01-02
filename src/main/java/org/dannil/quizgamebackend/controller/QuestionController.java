@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.dannil.quizgamebackend.manager.QuestionManager;
 import org.dannil.quizgamebackend.model.Question;
+import org.dannil.quizgamebackend.utility.CredentialsUtility;
 import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +31,13 @@ public class QuestionController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public final void questionGET(final HttpServletResponse response) throws IOException {
+	public final void questionGET(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
 		final LinkedList<Question> questions = this.questionManager.getQuestions();
 		if (questions.size() > 0) {
@@ -45,8 +51,13 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public final void questionIdGET(final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
+	public final void questionIdGET(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
 		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
 		final Question question = this.questionManager.get(id);
 		if (question != null) {
@@ -63,6 +74,11 @@ public class QuestionController {
 	public final void questionPOST(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
+
 		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
 		this.questionManager.add(question);
 
@@ -76,6 +92,11 @@ public class QuestionController {
 	public final void questionIdPOST(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
 		response.setContentType("application/json");
 
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
+
 		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
 		final Question result = this.questionManager.edit(id, question);
 
@@ -86,8 +107,13 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public final void questionIdDELETE(final HttpServletResponse response, @PathVariable("id") final Integer id) {
+	public final void questionIdDELETE(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) {
 		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
 		final boolean success = this.questionManager.delete(id);
 		if (success) {
@@ -98,8 +124,13 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
-	public final void questionCategoryGET(final HttpServletResponse response, @PathVariable("category") final String category) throws IOException {
+	public final void questionCategoryGET(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("category") final String category) throws IOException {
 		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
 		final LinkedList<Question> questions = this.questionManager.findByCategory(category);
 		if (questions.size() > 0) {
@@ -113,8 +144,13 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/{id}/answer", method = RequestMethod.GET)
-	public final void questionIdAnswerGET(final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
+	public final void questionIdAnswerGET(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
 		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
 		final LinkedList<String> answers = this.questionManager.getAnswers(id);
 		if (answers.size() > 0) {

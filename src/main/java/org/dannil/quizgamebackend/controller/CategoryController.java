@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.dannil.quizgamebackend.manager.QuestionManager;
+import org.dannil.quizgamebackend.utility.CredentialsUtility;
 import org.dannil.quizgamebackend.utility.JsonUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,13 @@ public final class CategoryController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public final void categoryGET(final HttpServletResponse response) throws IOException {
+	public final void categoryGET(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
 		final LinkedList<String> categories = this.questionManager.getCategories();
 		if (categories.size() > 0) {
