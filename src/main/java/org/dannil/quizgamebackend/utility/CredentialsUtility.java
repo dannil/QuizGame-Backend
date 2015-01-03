@@ -1,9 +1,18 @@
 package org.dannil.quizgamebackend.utility;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.dannil.quizgamebackend.model.Pair;
+
 public class CredentialsUtility {
 
-	public static final String USERNAME = "api-test";
-	public static final String TOKEN = "2fb5e13419fc89246865e7a324f476ec624e8740";
+	private static List<Pair<String, String>> logins;
+
+	static {
+		logins = new LinkedList<Pair<String, String>>();
+		logins.add(Pair.of("api-test", "2fb5e13419fc89246865e7a324f476ec624e8740"));
+	}
 
 	public CredentialsUtility() {
 		throw new UnsupportedOperationException();
@@ -13,7 +22,6 @@ public class CredentialsUtility {
 		if (username == null || token == null) {
 			return false;
 		}
-		return (username.equals(CredentialsUtility.USERNAME) && token.equals(CredentialsUtility.TOKEN));
+		return (logins.contains(Pair.of(username, token)));
 	}
-
 }
