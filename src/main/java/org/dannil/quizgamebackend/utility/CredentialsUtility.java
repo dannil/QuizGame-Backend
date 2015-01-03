@@ -13,7 +13,7 @@ public class CredentialsUtility {
 		if (username == null || token == null) {
 			return false;
 		}
-		return (username.equals(CredentialsUtility.USERNAME) || token.equals(CredentialsUtility.TOKEN));
+		return (username.equals(CredentialsUtility.USERNAME) && token.equals(CredentialsUtility.TOKEN));
 	}
 
 }
