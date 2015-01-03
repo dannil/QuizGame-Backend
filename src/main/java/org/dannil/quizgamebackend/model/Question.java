@@ -31,9 +31,10 @@ public class Question {
 		this.categories = categories;
 	}
 
-	public Question(final String title, final List<String> categories, final List<String> answers) {
+	public Question(final String title, final List<String> categories, final List<String> answers, final String correct) {
 		this(title, categories);
 		this.answers = answers;
+		this.correct = correct;
 	}
 
 	public final Integer getId() {
