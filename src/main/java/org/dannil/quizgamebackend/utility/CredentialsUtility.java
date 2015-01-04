@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.dannil.quizgamebackend.model.Pair;
 
+/**
+ * Class which performs operations on credentials, such as login.
+ * 
+ * @author Daniel Nilsson
+ */
 public class CredentialsUtility {
 
 	private static List<Pair<String, String>> logins;
@@ -18,6 +23,16 @@ public class CredentialsUtility {
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * Verify if the given login exists.
+	 * 
+	 * @param username
+	 * 					the username to check
+	 * @param token
+	 * 					the token to check
+	 * 
+	 * @return true if the login exists, otherwise false
+	 */
 	public static final boolean isLoginCorrect(final String username, final String token) {
 		if (username == null || token == null) {
 			return false;
