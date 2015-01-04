@@ -25,6 +25,22 @@ public final class Pair<L, R> {
 		this.right = right;
 	}
 
+	public final L getLeft() {
+		return this.left;
+	}
+
+	public final void setLeft(final L left) {
+		this.left = left;
+	}
+
+	public final R getRight() {
+		return this.right;
+	}
+
+	public final void setRight(final R right) {
+		this.right = right;
+	}
+
 	/**
 	 * Generate a new pair.
 	 * 
