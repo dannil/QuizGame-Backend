@@ -145,6 +145,26 @@ public class QuestionController {
 		}
 	}
 
+	@RequestMapping(value = "/{id}/category", method = RequestMethod.GET)
+	public final void questionIdCategoryGET(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
+		response.setContentType("application/json");
+
+		if (!CredentialsUtility.isLoginCorrect((String) request.getParameter("username"), (String) request.getParameter("token"))) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
+
+		final LinkedList<String> categories = new LinkedList<String>(this.questionManager.get(id).getCategories());
+		if (categories.size() > 0) {
+			final String json = JsonUtility.convertToJson(categories);
+			LOGGER.info("\n" + json);
+			response.getWriter().write(json);
+			response.setStatus(HttpServletResponse.SC_OK);
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		}
+	}
+
 	@RequestMapping(value = "/{id}/answer", method = RequestMethod.GET)
 	public final void questionIdAnswerGET(final HttpServletRequest request, final HttpServletResponse response, @PathVariable("id") final Integer id) throws IOException {
 		response.setContentType("application/json");
