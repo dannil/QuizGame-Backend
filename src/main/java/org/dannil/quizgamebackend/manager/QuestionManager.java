@@ -45,20 +45,6 @@ public final class QuestionManager {
 		return null;
 	}
 
-	public final LinkedList<Question> findByCategory(final String category) {
-		final LinkedList<Question> temp = new LinkedList<Question>();
-		for (Question q : questions) {
-			if (q.getCategories() != null) {
-				for (String s : q.getCategories()) {
-					if (s.equals(category)) {
-						temp.add(q);
-					}
-				}
-			}
-		}
-		return temp;
-	}
-
 	public final void add(final Question question) {
 		question.setId(ID);
 		ID++;
@@ -108,17 +94,18 @@ public final class QuestionManager {
 		return categories;
 	}
 
-	public final LinkedList<String> getAnswers(final int id) {
-		final LinkedList<String> answers = new LinkedList<String>();
+	public final LinkedList<Question> findByCategory(final String category) {
+		final LinkedList<Question> temp = new LinkedList<Question>();
 		for (Question q : questions) {
-			if (q.getId().equals(id) && q.getAnswers() != null) {
-				for (String s : q.getAnswers()) {
-					answers.add(s);
+			if (q.getCategories() != null) {
+				for (String s : q.getCategories()) {
+					if (s.equals(category)) {
+						temp.add(q);
+					}
 				}
-				answers.add(q.getCorrect());
 			}
 		}
-		return answers;
+		return temp;
 	}
 
 }

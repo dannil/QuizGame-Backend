@@ -154,9 +154,9 @@ public class QuestionController {
 			return;
 		}
 
-		final LinkedList<String> categories = new LinkedList<String>(this.questionManager.get(id).getCategories());
-		if (categories.size() > 0) {
-			final String json = JsonUtility.convertToJson(categories);
+		final Question question = this.questionManager.get(id);
+		if (question != null && question.getCategories() != null) {
+			final String json = JsonUtility.convertToJson(question.getCategories());
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
 			response.setStatus(HttpServletResponse.SC_OK);
@@ -174,8 +174,11 @@ public class QuestionController {
 			return;
 		}
 
-		final LinkedList<String> answers = this.questionManager.getAnswers(id);
-		if (answers.size() > 0) {
+		final Question question = this.questionManager.get(id);
+		if (question != null && question.getAnswers() != null) {
+			final LinkedList<String> answers = new LinkedList<String>(question.getAnswers());
+			answers.add(question.getCorrect());
+
 			final String json = JsonUtility.convertToJson(answers);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
