@@ -3,6 +3,7 @@ package org.dannil.quizgamebackend.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
@@ -107,6 +108,11 @@ public class Question {
 				this.answers.remove(answer);
 			}
 		}
+	}
+
+	@JsonIgnore
+	public final boolean isValueNull() {
+		return (this.getTitle() == null || this.getCategories() == null || this.getAnswers() == null || this.getCorrect() == null);
 	}
 
 	@Override

@@ -80,11 +80,12 @@ public class QuestionController {
 		}
 
 		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
-		this.questionManager.add(question);
-
-		final String json = JsonUtility.convertToJson(question);
-		LOGGER.info("\n" + json);
-		response.getWriter().write(json);
+		if (!question.isValueNull()) {
+			this.questionManager.add(question);
+			final String json = JsonUtility.convertToJson(question);
+			LOGGER.info("\n" + json);
+			response.getWriter().write(json);
+		}
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
@@ -98,11 +99,12 @@ public class QuestionController {
 		}
 
 		final Question question = JsonUtility.convertFromJson(request.getParameter("json"));
-		final Question result = this.questionManager.edit(id, question);
-
-		final String json = JsonUtility.convertToJson(result);
-		LOGGER.info("\n" + json);
-		response.getWriter().write(json);
+		if (!question.isValueNull()) {
+			final Question result = this.questionManager.edit(id, question);
+			final String json = JsonUtility.convertToJson(result);
+			LOGGER.info("\n" + json);
+			response.getWriter().write(json);
+		}
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 
