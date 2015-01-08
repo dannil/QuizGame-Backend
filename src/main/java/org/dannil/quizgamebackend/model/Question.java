@@ -80,7 +80,7 @@ public class Question {
 
 	public final void addCategories(final String... categories) {
 		for (String category : categories) {
-			if (category != null) {
+			if (category != null && !this.categories.contains(category)) {
 				this.categories.add(category);
 			}
 		}
@@ -96,7 +96,7 @@ public class Question {
 
 	public final void addAnswers(final String... answers) {
 		for (String answer : answers) {
-			if (answer != null) {
+			if (answer != null && !this.answers.contains(answer)) {
 				this.answers.add(answer);
 			}
 		}
