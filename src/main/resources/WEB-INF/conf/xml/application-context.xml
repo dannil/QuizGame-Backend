@@ -15,9 +15,14 @@
 	   http://www.springframework.org/schema/data/jpa
 	   http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-  	<mvc:annotation-driven />
-	
 	<context:annotation-config />
 	<context:component-scan base-package="org.dannil.quizgamebackend.controller"/>
+	<context:component-scan base-package="org.dannil.quizgamebackend.interceptor"/>
+
+  	<mvc:annotation-driven />
+  	
+	<mvc:interceptors>
+    	<bean class="org.dannil.quizgamebackend.interceptor.AuthenticationInterceptor" />
+	</mvc:interceptors>
 
 </beans>
