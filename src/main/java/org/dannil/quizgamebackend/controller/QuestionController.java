@@ -69,8 +69,9 @@ public class QuestionController {
 			final String json = JsonUtility.convertToJson(question);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
+			response.setStatus(HttpServletResponse.SC_OK);
 		}
-		response.setStatus(HttpServletResponse.SC_OK);
+		response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
@@ -83,8 +84,9 @@ public class QuestionController {
 			final String json = JsonUtility.convertToJson(result);
 			LOGGER.info("\n" + json);
 			response.getWriter().write(json);
+			response.setStatus(HttpServletResponse.SC_OK);
 		}
-		response.setStatus(HttpServletResponse.SC_OK);
+		response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
