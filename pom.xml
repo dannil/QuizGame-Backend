@@ -30,9 +30,6 @@
 		<!-- FRAMEWORK -->
 		<spring.version>4.1.4.RELEASE</spring.version>
 		
-		<!-- DATABASE -->
-		<mysql-connector.version>5.1.34</mysql-connector.version>
-		
 		<!-- OTHER -->
 		<jackson.version>1.9.13</jackson.version>
 		<servlet-api.version>3.1.0</servlet-api.version>
@@ -100,15 +97,6 @@
 		</dependency>
 		
 		<!-- END FRAMEWORK -->
-		
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		
-		<!-- END DATABASE -->
 
 		<!-- OTHER -->
 		
