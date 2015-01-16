@@ -1,4 +1,4 @@
-package org.dannil.quizgamebackend.model;
+package org.dannil.quizgamebackend.deprecated;
 
 /**
  * Class for saving values as pairs; useful for i.e. logins

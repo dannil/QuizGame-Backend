@@ -16,7 +16,7 @@ public final class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public final boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
-		if (!CredentialsUtility.isLoginCorrect(request.getParameter("username"), request.getParameter("token"))) {
+		if (!CredentialsUtility.isAuthCorrect(request.getHeader("authorization"))) {
 			LOGGER.error("Invalid login, sending 401 response!");
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			return false;
