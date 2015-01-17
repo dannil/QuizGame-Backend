@@ -8,7 +8,7 @@ import java.util.List;
  * 
  * @author Daniel Nilsson
  */
-public class CredentialsUtility {
+public class AuthUtility {
 
 	private static List<String> logins;
 
@@ -17,7 +17,7 @@ public class CredentialsUtility {
 		logins.add("Basic YXBpLXRlc3Q6MmZiNWUxMzQxOWZjODkyNDY4NjVlN2EzMjRmNDc2ZWM2MjRlODc0MA==");
 	}
 
-	public CredentialsUtility() {
+	public AuthUtility() {
 		throw new UnsupportedOperationException();
 	}
 
