@@ -18,7 +18,7 @@ public final class JsonUtility {
 	 * @throws IOException
 	 * 						if the object couldn't be parsed to JSON
 	 */
-	public final static String convertToJson(final Object obj) throws IOException {
+	public final static <T> String convertToJson(final T obj) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
 	}
